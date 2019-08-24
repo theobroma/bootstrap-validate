@@ -1,4 +1,9 @@
-import { CLASS_ERROR, CLASS_HELP_BLOCK, ELEMENT_HELP_BLOCK } from "./constants";
+import {
+  CLASS_ERROR,
+  CLASS_SUCCESS,
+  CLASS_HELP_BLOCK,
+  ELEMENT_HELP_BLOCK
+} from "./constants";
 
 module.exports = (input, rule, isValid, text) => {
   const specificErrorClass = `has-error-${rule}`;
@@ -11,9 +16,11 @@ module.exports = (input, rule, isValid, text) => {
       // Element already has an error element which we can safely remove.
       input.classList.remove(CLASS_ERROR);
       specificHelpBlock.style.display = "none";
+      input.classList.add(CLASS_SUCCESS);
     }
   } else {
     // Not Valid!
+    input.classList.remove(CLASS_SUCCESS);
     if (specificHelpBlock) {
       // Element also has an error element.
       specificHelpBlock.innerHTML = text;
